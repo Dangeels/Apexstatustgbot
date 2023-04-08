@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Apexstatustgbot.iml" filepath="$PROJECT_DIR$/.idea/Apexstatustgbot.iml" />
+      <module fileurl="file://D:/Python/TelegramApexApi/.idea/TelegramApexApi.iml" filepath="D:/Python/TelegramApexApi/.idea/TelegramApexApi.iml" />
+    </modules>
+  </component>
+</project>
