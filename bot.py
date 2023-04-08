@@ -25,10 +25,11 @@ def start(m):
 
 @bot.message_handler(regexp='Search')
 def platform(m):
+    """
+    Getting a platform parameter for apex.alplayer request
+    """
     markup = InlineKeyboardMarkup()
 
-    # menu = KeyboardButton('Menu')
-    # markup.add(menu)
 
     text = "Choose platform: "
 
@@ -38,17 +39,14 @@ def platform(m):
 
     msg = bot.send_message(m.chat.id, text=text, reply_markup=markup)
     bot.register_next_step_handler(msg, player)
-    # sg = bot.send_message(m.chat.id, text, reply_markup=markup)
-    # ot.register_next_step_handler(msg, callback='platform')
 
 
 def player(m):
+    """Getting player's nickname parameter for apex.alplayer request"""
+
     plyr = apex.alplayer(m.text, platform_data['alplatform'])
 
     inline_markup = InlineKeyboardMarkup()
-
-
-
     inline_markup.add(
             InlineKeyboardButton(text=f'Selected legend', callback_data=f'selected_legend?{m.text}')
         )
@@ -67,7 +65,7 @@ def player(m):
 @bot.message_handler(regexp='Store')
 def store(m):
     inline_markup = InlineKeyboardMarkup()
-
+    #variables for pagination
     index = 4
     page = 1
 
