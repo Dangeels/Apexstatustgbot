@@ -6,7 +6,7 @@ from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardBu
 
 bot = telebot.TeleBot(config.BotToken)
 
-platform_data = {'tg_id': None, 'alplatform': 'PC'}
+platform_data = {}
 
 
 @bot.message_handler(commands=['start'])
@@ -43,7 +43,7 @@ def platform(m):
 def player(m):
     """Getting player's nickname parameter for apex.alplayer request"""
 
-    plyr = apex.alplayer(m.text, platform_data['alplatform'])
+    plyr = apex.alplayer(m.text, platform_data[m.chat.id])
 
     inline_markup = InlineKeyboardMarkup()
     inline_markup.add(
@@ -309,7 +309,7 @@ def callback_query(call):
 
     elif query[0] == 'platform':
 
-        platform_data['alplatform'] = query[1]
+        platform_data[call.message.chat.id] = query[1]
 
         bot.edit_message_text(text="Type player's nickname: ", chat_id=call.message.chat.id,
                               message_id=call.message.message_id)
@@ -317,7 +317,7 @@ def callback_query(call):
     elif query[0] == 'player':
 
 
-        plyr = apex.alplayer(query[2],platform_data['alplatform'])
+        plyr = apex.alplayer(query[2],platform_data[call.message.chat.id])
 
         if query[1] == 'global':
             markup = InlineKeyboardMarkup()
@@ -346,7 +346,7 @@ def callback_query(call):
 
         markup.add(InlineKeyboardButton(text='Back', callback_data=f'player?global?{query[1]}'))
 
-        plyr = apex.alplayer(query[1], platform_data['alplatform'])
+        plyr = apex.alplayer(query[1], platform_data[call.message.chat.id])
 
         legend = plyr["legends"]["selected"]
 
